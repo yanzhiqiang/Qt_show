@@ -26,6 +26,9 @@ public:
 private slots:
 	void slotPicShow();
 	void slotVideoShow();
+	void slotStart();
+	void slotStop();
+	void slotReset();
 private:
 	int pic_counter;
 };

@@ -1,7 +1,7 @@
 #include "standarddialogs.h"
 #include <QDialog>
 
-#define _PIC_TIME	1
+#define _PIC_TIME	40
 #define	_VIDEO_TIME	40
 
 //StandardDialogs::StandardDialogs(QWidgt* parent,Qt::WindowFlags f) : QDialog(parent,f)
@@ -52,6 +52,11 @@ StandardDialogs::StandardDialogs(QWidget* parent,Qt::WindowFlags f)
 	connect(picTime,SIGNAL(timeout()),this,SLOT(slotPicShow()));
 	connect(videoTime,SIGNAL(timeout()),this,SLOT(slotVideoShow()));	
 
+	connect(startPushButton,SIGNAL(clicked()),this,SLOT(slotStart()));
+	connect(stopPushButton,SIGNAL(clicked()),this,SLOT(slotStop()));
+	connect(resetPushButton,SIGNAL(clicked()),this,SLOT(slotReset()));
+	//QResource::registerResource("/root/project/qt_show/code_source/test_pic/image/test_pic.rcc");
+
 }
 
 void StandardDialogs::slotPicShow()
@@ -60,7 +65,8 @@ void StandardDialogs::slotPicShow()
 	timeLabel->setText(strTime);
 	
 	char file_name[20] = {0};
-	sprintf(file_name,"./image/%d%s",pic_counter,".png");
+	sprintf(file_name,":/image/%d%s",pic_counter,".png");
+	//sprintf(file_name,"./image/%d%s",pic_counter,".png");
 	QImage* image = new QImage(file_name);
 	picLabel->setPixmap(QPixmap::fromImage(*image));
 	pic_counter++;
@@ -71,51 +77,30 @@ void StandardDialogs::slotPicShow()
 
 void StandardDialogs::slotVideoShow()
 {
+	return ;
+}
+
+void StandardDialogs::slotStart()
+{
+	picTime->start();
+	videoTime->start();
+}
+
+void StandardDialogs::slotStop()
+{
+	picTime->stop();
+	videoTime->stop();
+}
+
+void StandardDialogs::slotReset()
+{
+	picTime->start();
+	videoTime->start();
 }
 
 
 StandardDialogs::~StandardDialogs()
 {
-	/*if(filePushButton)
-	{
-		delete filePushButton;
-		filePushButton = NULL;
-	}
 	
-	if(colorPushButton)
-	{
-		delete colorPushButton;
-		colorPushButton = NULL;
-	}	
-
-	if(fontPushButton)
-	{
-		delete fontPushButton;
-		fontPushButton = NULL;
-	}
-	
-	if(fileLineEdit)
-	{
-		delete fileLineEdit;
-		fileLineEdit = NULL;
-	}
-	
-	if(fontLineEdit)
-	{
-		delete fontLineEdit;
-		fontLineEdit = NULL;
-	}
-	
-	if(colorFrame)
-	{
-		delete colorFrame;
-		colorFrame = NULL;
-	}
-
-	if(layout)
-	{
-		delete layout;
-		layout = NULL;
-	}*/
 	return ;
 }
