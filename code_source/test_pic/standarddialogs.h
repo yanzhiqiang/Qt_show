@@ -1,0 +1,36 @@
+#ifndef __STANDARDDIALOGS_H
+#define __STANDARDDiALOGS_H
+
+#include <QtCore>
+#include <QtGui>
+
+QT_BEGIN_NAMESPACE
+
+
+class StandardDialogs:public QDialog
+{
+	Q_OBJECT
+public:
+	StandardDialogs(QWidget *parent=0,Qt::WindowFlags f=0);
+	~StandardDialogs();
+public:
+	QGridLayout 	*layout;
+	QLabel		*videoLabel;	//need to change	
+	QLabel		*timeLabel;
+	QLabel		*picLabel;
+	QPushButton	*startPushButton;
+	QPushButton	*stopPushButton;
+	QPushButton	*resetPushButton;
+	QTimer		*picTime;
+	QTimer		*videoTime;
+private slots:
+	void slotPicShow();
+	void slotVideoShow();
+private:
+	int pic_counter;
+};
+
+QT_END_NAMESPACE
+
+#endif
+
